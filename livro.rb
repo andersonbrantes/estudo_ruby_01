@@ -45,19 +45,20 @@ class Estoque
 	def initialize
 		@livros = []
 	end
-end
 
-def exporta_csv(estoque)
-	estoque.each do |livro|
-		puts "#{livro.titulo} - #{livro.ano_lancamento}"
+	def exporta_csv
+		@livros.each do |livro|
+			puts "#{livro.titulo} - #{livro.ano_lancamento}"
+		end
+	end
+
+	def mais_baratos_que(valor)
+		@livros.select do |livro|
+			livro.preco <= valor
+		end
 	end
 end
 
-def mais_baratos_que(estoque, valor)
-	estoque.select do |livro|
-		livro.preco <= valor
-	end
-end
 
 
 algoritmos = Livro.new("Algoritmos", 100, 1998, true)
@@ -67,13 +68,13 @@ arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true)
 estoque = Estoque.new
 estoque.livros << algoritmos << arquitetura
 
-estoque << Livro.new("The pragmatic programmer", 100, 1999, true)
-estoque << Livro.new("Programming Ruby", 100, 2004, true)
+estoque.livros << Livro.new("The pragmatic programmer", 100, 1999, true)
+estoque.livros << Livro.new("Programming Ruby", 100, 2004, true)
 
 
-exporta_csv(estoque)	
+estoque.exporta_csv
 
-baratos = mais_baratos_que(estoque, 80)
+baratos = estoque.mais_baratos_que 80
 baratos.each do |livro|
 	puts livro.titulo
 end

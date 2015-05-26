@@ -39,6 +39,14 @@ def livro_para_newsletter(livro)
 	end
 end
 
+class Estoque
+	attr_reader :livros 
+
+	def initialize
+		@livros = []
+	end
+end
+
 def exporta_csv(estoque)
 	estoque.each do |livro|
 		puts "#{livro.titulo} - #{livro.ano_lancamento}"
@@ -56,7 +64,9 @@ algoritmos = Livro.new("Algoritmos", 100, 1998, true)
 #livro_para_newsletter(algoritmos)
 arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true)
 
-estoque = [algoritmos, arquitetura]
+estoque = Estoque.new
+estoque.livros << algoritmos << arquitetura
+
 estoque << Livro.new("The pragmatic programmer", 100, 1999, true)
 estoque << Livro.new("Programming Ruby", 100, 2004, true)
 

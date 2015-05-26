@@ -23,6 +23,10 @@ class Livro
 			base
 		end
 	end
+
+	def possui_reimpressao?
+		@possui_reimpressao
+	end
 end
 
 def livro_para_newsletter(livro)
@@ -31,9 +35,35 @@ def livro_para_newsletter(livro)
 		puts "Newsletter/Liquidação"
 		puts livro.titulo
 		puts livro.preco
+		puts livro.possui_reimpressao?
+	end
+end
+
+def exporta_csv(estoque)
+	estoque.each do |livro|
+		puts "#{livro.titulo} - #{livro.ano_lancamento}"
+	end
+end
+
+def mais_baratos_que(estoque, valor)
+	estoque.select do |livro|
+		livro.preco <= valor
 	end
 end
 
 
 algoritmos = Livro.new("Algoritmos", 100, 1998, true)
-livro_para_newsletter(algoritmos)
+#livro_para_newsletter(algoritmos)
+arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true)
+
+estoque = [algoritmos, arquitetura]
+estoque << Livro.new("The pragmatic programmer", 100, 1999, true)
+estoque << Livro.new("Programming Ruby", 100, 2004, true)
+
+
+exporta_csv(estoque)	
+
+baratos = mais_baratos_que(estoque, 80)
+baratos.each do |livro|
+	puts livro.titulo
+end

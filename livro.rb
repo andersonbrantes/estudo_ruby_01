@@ -43,23 +43,25 @@ def livro_para_newsletter(livro)
 	end
 end
 
+module Contador
+	def <<(livro)
+		push(livro)
+		if @maximo_nescessario.nil? || @maximo_nescessario < size
+			@maximo_nescessario = size
+		end
+		self
+	end
+
+	attr_reader :maximo_nescessario
+end
+
 class Estoque
 
 	attr_reader :livros
 
 	def initialize
 		@livros = []
-		def @livros.<<(livro)
-			push(livro)
-			if @maximo_nescessario.nil? || @maximo_nescessario < size
-				@maximo_nescessario = size
-			end
-			self
-		end
-
-		def @livros.maximo_nescessario
-			@maximo_nescessario
-		end
+		@livros.extend Contador
 	end
 
 	def exporta_csv

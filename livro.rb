@@ -80,8 +80,17 @@ class Estoque
 		@livros.size
 	end
 
-	def adiciona(livro)
+	def <<(livro)
 		@livros << livro if livro
+		self
+	end
+
+	def remove(livro)
+		@livros.delete livro
+	end
+
+	def maximo_nescessario
+		@livros.maximo_nescessario
 	end
 end
 
@@ -103,6 +112,6 @@ estoque << algoritmos << arquitetura << programmer << ruby
 
 puts estoque.maximo_nescessario
 
-estoque.delete algoritmos
+estoque.remove algoritmos
 
 puts estoque.maximo_nescessario

@@ -52,6 +52,7 @@ class Array
 		if @maximo_nescessario.nil? || @maximo_nescessario < size
 			@maximo_nescessario = size
 		end
+		self
 	end
 end
 
@@ -96,7 +97,12 @@ arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true)
 programmer = Livro.new("The pragmatic programmer", 100, 1999, true)
 ruby = Livro.new("Programming Ruby", 100, 2004, true)
 
+
 estoque = Estoque.new
 estoque.livros << algoritmos << arquitetura << programmer << ruby
 
+puts estoque.livros.maximo_nescessario
+
 estoque.livros.delete algoritmos
+
+puts estoque.livros.maximo_nescessario

@@ -43,25 +43,23 @@ def livro_para_newsletter(livro)
 	end
 end
 
-class Array
-
-	attr_reader :maximo_nescessario
-
-	def <<(livro)
-		push(livro)
-		if @maximo_nescessario.nil? || @maximo_nescessario < size
-			@maximo_nescessario = size
-		end
-		self
-	end
-end
-
 class Estoque
 
 	attr_reader :livros
 
 	def initialize
 		@livros = []
+		def @livros.<<(livro)
+			push(livro)
+			if @maximo_nescessario.nil? || @maximo_nescessario < size
+				@maximo_nescessario = size
+			end
+			self
+		end
+
+		def @livros.maximo_nescessario
+			@maximo_nescessario
+		end
 	end
 
 	def exporta_csv

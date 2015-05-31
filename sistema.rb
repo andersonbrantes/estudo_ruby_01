@@ -1,4 +1,5 @@
-require_relative 'livro'
+require_relative "livro"
+require_relative "estoque"
 
 def livro_para_newsletter(livro)
 
@@ -7,57 +8,6 @@ def livro_para_newsletter(livro)
 		puts livro.titulo
 		puts livro.preco
 		puts livro.possui_reimpressao?
-	end
-end
-
-module Contador
-	def <<(livro)
-		push(livro)
-		if @maximo_nescessario.nil? || @maximo_nescessario < size
-			@maximo_nescessario = size
-		end
-		self
-	end
-
-	attr_reader :maximo_nescessario
-end
-
-class Estoque
-
-	attr_reader :livros
-
-	def initialize
-		@livros = []
-		@livros.extend Contador
-	end
-
-	def exporta_csv
-		@livros.each do |livro|
-			puts livro.to_csv
-		end
-	end
-
-	def mais_baratos_que(valor)
-		@livros.select do |livro|
-			livro.preco <= valor
-		end
-	end
-
-	def total
-		@livros.size
-	end
-
-	def <<(livro)
-		@livros << livro if livro
-		self
-	end
-
-	def remove(livro)
-		@livros.delete livro
-	end
-
-	def maximo_nescessario
-		@livros.maximo_nescessario
 	end
 end
 

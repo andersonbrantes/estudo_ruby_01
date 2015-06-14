@@ -13,22 +13,24 @@ end
 
 
 estoque = Estoque.new
-algoritmos = Livro.new("Algoritmos", 100, 1998, true)
+algoritmos = Livro.new("Algoritmos", 100, 1998, true, "")
 
 estoque << algoritmos
 
 puts estoque.maximo_nescessario
 
-arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true)
-programmer = Livro.new("The pragmatic programmer", 100, 1999, true)
-ruby = Livro.new("Programming Ruby", 100, 2004, true)
+arquitetura = Livro.new("Introducao a arquitetura de software", 70, 2011, true, "")
+programmer = Livro.new("The pragmatic programmer", 100, 1999, true, "")
+ruby = Livro.new("Programming Ruby", 100, 2004, true, "")
 
 
 estoque = Estoque.new
-estoque << algoritmos << arquitetura << programmer << ruby
+estoque << algoritmos << algoritmos << ruby << programmer << arquitetura << ruby << ruby
 
-puts estoque.maximo_nescessario
+estoque.vende ruby
+estoque.vende algoritmos
+estoque.vende algoritmos
+estoque.vende ruby
+estoque.vende ruby
 
-estoque.remove algoritmos
-
-puts estoque.maximo_nescessario
+puts estoque.livro_que_mais_vendeu_por_titulo.titulo

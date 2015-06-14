@@ -6,7 +6,18 @@ class Estoque
 
 	def initialize
 		@livros = []
+		@vendas = []
 		@livros.extend Contador
+	end
+
+	def quantidade_de_vendas_de_titulo(produto)
+		@vendas.count { |venda| venda.titulo == produto}
+	end
+
+	def livro_que_mais_vendeu_por_titulo
+		@vendas.sort { |v1, v2|
+			quantidade_de_vendas_de_titulo(v1) <=> quantidade_de_vendas_de_titulo(v2)
+		}.last
 	end
 
 	def exporta_csv
@@ -30,8 +41,9 @@ class Estoque
 		self
 	end
 
-	def remove(livro)
+	def vende(livro)
 		@livros.delete livro
+		@vendas << livro
 	end
 
 	def maximo_nescessario
